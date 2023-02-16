@@ -2,21 +2,28 @@
     margin: 0;
     padding: 0;
   }
-  
+
   .container {
+    margin-top: 15px;
+    text-align: center;
+
+  }
+  
+  .container-content-center {
     display: flex;
     justify-content: center;
     margin-top: 15px;
+    border: 1px solid black;
   }
   
   .caja-sugerencias {
-    border: 1px solid black;
     margin-top: 5px;
     min-height: 95px;
   }
   
   .sugerencia {
     cursor: pointer;
+
   }
   
   .sugerencia:hover {
@@ -24,8 +31,8 @@
   }
   
   #mapa {
-    height: 400px;
-    width: 700px;
+    height: 800px;
+    width: 100%;
   
   }
   
