@@ -5,10 +5,10 @@ const RAPID_API_KEY = "0bec2bde07msh72c0629e6e04e01p1892dfjsn084c2fa73404";
 const RAPID_API_HOST = "wft-geo-db.p.rapidapi.com";
 
 var timeoutId;
-var waitTime = 1000;
+var waitTime = 500;
 var shouldCallApi = false;
 // Variable donde guardare la lista de poblaciones encontradas
-var poblacionesEncontradas = null;
+var poblacionesEncontradas = [sugerencias.length];
 
 // Añadimos manejador de eventos onclick a las sugerencias
 for (let i = 0; i < sugerencias.length; i++) {
@@ -21,8 +21,8 @@ for (let i = 0; i < sugerencias.length; i++) {
       poblacionesEncontradas[i].name;
     document.getElementById("comunidad_autonoma").innerHTML =
       "Comunidad Autonoma: " + poblacionesEncontradas[i].region;
-    document.getElementById("numero_poblacion").innerHTML =
-      "Poblacion: " + poblacionesEncontradas[i].population;
+      document.getElementById("numero_poblacion").innerHTML =
+      "Número de Poblacion: " + poblacionesEncontradas[i].population;
   });
 }
 
@@ -59,7 +59,11 @@ input_ciudad.addEventListener("keyup", function () {
           // controlar que la variable poblacionesEncontradas no se asigne como vacia 
           // en caso de que la respuesta no contenga ningun elemento 
           if (respuesta.data.length > 0) {
-            poblacionesEncontradas = respuesta.data;
+            // recorro la respuesta.data para obtener solo las poblaciones que se hayan encontrado
+            // sin tener que destruir y crear el array entero por cada peticion
+            for (let i = 0; i < respuesta.data.length; i++) {
+              poblacionesEncontradas[i] = respuesta.data[i];
+            }
 
             for (let i = 0; i < poblacionesEncontradas.length && i < sugerencias.length; i++) {
               sugerencias[i].innerHTML = poblacionesEncontradas[i].name;
@@ -111,7 +115,7 @@ document.getElementById("buscar").addEventListener("click", function () {
           document.getElementById("comunidad_autonoma").innerHTML =
             "Comunidad Autonoma: " + poblacionEncontrada.region;
           document.getElementById("numero_poblacion").innerHTML =
-            "Poblacion: " + poblacionEncontrada.population;
+            "Número de Poblacion: " + poblacionEncontrada.population;
         } else {
           alert("No se ha encontrado la poblacion introducida");
         }
