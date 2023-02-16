@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+  }
+  
+  .caja-sugerencias {
+    border: 1px solid black;
+    margin-top: 5px;
+    min-height: 95px;
+  }
+  
+  .sugerencia {
+    cursor: pointer;
+  }
+  
+  .sugerencia:hover {
+    background-color: rgb(225, 225, 225);
+  }
+  
+  #mapa {
+    height: 400px;
+    width: 700px;
+  
+  }
+  
