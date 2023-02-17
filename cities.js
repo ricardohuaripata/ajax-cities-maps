@@ -13,7 +13,10 @@ var poblacionesEncontradas = [sugerencias.length];
 // Añadimos manejador de eventos onclick a las sugerencias
 for (let i = 0; i < sugerencias.length; i++) {
   sugerencias[i].addEventListener("click", function () {
-    iniciarMapa(poblacionesEncontradas[i].latitude, poblacionesEncontradas[i].longitude);
+    iniciarMapa(
+      poblacionesEncontradas[i].latitude,
+      poblacionesEncontradas[i].longitude
+    );
     document.getElementById("poblacionEncontrada").innerHTML =
       poblacionesEncontradas[i].name;
     document.getElementById("comunidad_autonoma").innerHTML =
@@ -56,16 +59,12 @@ input_ciudad.addEventListener("keyup", function () {
           // controlar que la variable poblacionesEncontradas no se asigne como vacia
           // en caso de que la respuesta no contenga ningun elemento
           if (respuesta.data.length > 0) {
-            // recorro la respuesta.data para obtener solo las poblaciones que se hayan encontrado
-            // sin tener que destruir y crear el array entero por cada peticion
-            for (let i = 0; i < respuesta.data.length; i++) {
-              poblacionesEncontradas[i] = respuesta.data[i];
-            }
-
             for (let i = 0; i < sugerencias.length; i++) {
               if (i < respuesta.data.length) {
+                // voy guardando resultados
+                poblacionesEncontradas[i] = respuesta.data[i];
+                // voy pintando los resultados
                 sugerencias[i].innerHTML = respuesta.data[i].name;
-                // else para vaciar el texto de la sugerencias anteriores
               } else {
                 sugerencias[i].innerHTML = "";
               }
