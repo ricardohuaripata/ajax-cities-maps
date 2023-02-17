@@ -13,15 +13,12 @@ var poblacionesEncontradas = [sugerencias.length];
 // Añadimos manejador de eventos onclick a las sugerencias
 for (let i = 0; i < sugerencias.length; i++) {
   sugerencias[i].addEventListener("click", function () {
-    iniciarMapa(
-      poblacionesEncontradas[i].latitude,
-      poblacionesEncontradas[i].longitude
-    );
+    iniciarMapa(poblacionesEncontradas[i].latitude, poblacionesEncontradas[i].longitude);
     document.getElementById("poblacionEncontrada").innerHTML =
       poblacionesEncontradas[i].name;
     document.getElementById("comunidad_autonoma").innerHTML =
       "Comunidad Autonoma: " + poblacionesEncontradas[i].region;
-      document.getElementById("numero_poblacion").innerHTML =
+    document.getElementById("numero_poblacion").innerHTML =
       "Número de Poblacion: " + poblacionesEncontradas[i].population;
   });
 }
@@ -56,8 +53,8 @@ input_ciudad.addEventListener("keyup", function () {
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
           var respuesta = JSON.parse(xhr.responseText);
-          // controlar que la variable poblacionesEncontradas no se asigne como vacia 
-          // en caso de que la respuesta no contenga ningun elemento 
+          // controlar que la variable poblacionesEncontradas no se asigne como vacia
+          // en caso de que la respuesta no contenga ningun elemento
           if (respuesta.data.length > 0) {
             // recorro la respuesta.data para obtener solo las poblaciones que se hayan encontrado
             // sin tener que destruir y crear el array entero por cada peticion
@@ -65,10 +62,14 @@ input_ciudad.addEventListener("keyup", function () {
               poblacionesEncontradas[i] = respuesta.data[i];
             }
 
-            for (let i = 0; i < poblacionesEncontradas.length && i < sugerencias.length; i++) {
-              sugerencias[i].innerHTML = poblacionesEncontradas[i].name;
+            for (let i = 0; i < sugerencias.length; i++) {
+              if (i < respuesta.data.length) {
+                sugerencias[i].innerHTML = respuesta.data[i].name;
+                // else para vaciar el texto de la sugerencias anteriores
+              } else {
+                sugerencias[i].innerHTML = "";
+              }
             }
-            
           }
         }
       };
