@@ -1,5 +1,6 @@
-const GOOGLE_API_KEY = "AIzaSyAKIHCQq4vPTx1PP58dERRwaZe4578t_ZY";
-const RAPID_API_KEY = "0bec2bde07msh72c0629e6e04e01p1892dfjsn084c2fa73404";
+// MISMA FUNCIONALIDAD QUE EL ARCHIVO cities.js PERO USANDO JQUERY EN VEZ DE XMLHttpRequest
+const GOOGLE_API_KEY = "";
+const RAPID_API_KEY = "";
 const RAPID_API_HOST = "wft-geo-db.p.rapidapi.com";
 
 var input_ciudad = document.getElementById("input_ciudad");
